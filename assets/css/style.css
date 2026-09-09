@@ -323,8 +323,12 @@ img {
 /* Footer */
 .footer-stackly {
   background-color: var(--primary-light);
-  color: rgba(255, 255, 255, 0.7);
+  color: #ffffff;
   padding: 80px 0 30px;
+}
+
+.footer-stackly p {
+  color: #ffffff;
 }
 
 .footer-stackly h5 {
@@ -534,7 +538,7 @@ img {
 /* Footer */
 .footer-stackly {
   background-color: var(--primary-light);
-  color: rgba(255, 255, 255, 0.7);
+  color: #ffffff;
   padding: 80px 0 30px;
 }
 
