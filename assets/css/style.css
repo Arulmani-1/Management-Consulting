@@ -845,3 +845,25 @@ img {
   }
 }
 /* Horizontal Overflow Debugging */
+
+/* Infinite Marquee Animation */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    position: relative;
+    padding-bottom: 10px;
+}
+.marquee-content {
+    display: inline-flex;
+    width: max-content;
+    animation: scroll-marquee 20s linear infinite;
+}
+.marquee-content:hover {
+    animation-play-state: paused;
+}
+@keyframes scroll-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
