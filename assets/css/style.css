@@ -8,6 +8,11 @@ html, body {
   max-width: 100%;
 }
 
+section, header, footer {
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
 :root {
   /* Brand Colors */
   --primary-color: #0d2922;
@@ -138,7 +143,6 @@ img {
 
 .navbar-stackly.scrolled {
   background-color: rgba(13, 41, 34, 0.95);
-  backdrop-filter: blur(10px);
   padding: 15px 0;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
@@ -785,6 +789,11 @@ img {
   
   #offcanvasNavbar .nav-link.active {
     opacity: 1;
+    color: #ff6b9d !important;
+  }
+  
+  #offcanvasNavbar .nav-link::after {
+    display: none !important;
   }
 
   #offcanvasNavbar .nav-item {
@@ -793,7 +802,7 @@ img {
   }
 
   #offcanvasNavbar .nav-item:has(.active) {
-    border-bottom: 2px solid #bbf7d0;
+    border-bottom: 2px solid #ff6b9d;
     margin-bottom: 1.5rem;
   }
   
@@ -831,3 +840,4 @@ img {
     text-align: center !important;
   }
 }
+/* Horizontal Overflow Debugging */
