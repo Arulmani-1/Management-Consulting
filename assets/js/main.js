@@ -15,12 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // Set active nav item based on current URL
-  const navLinks = document.querySelectorAll('.nav-link');
-  const currentPath = window.location.pathname;
+  let pathName = window.location.pathname.split('/').pop();
+  if (pathName === '') pathName = 'index.html';
   
-  navLinks.forEach(link => {
-    if(link.getAttribute('href') && currentPath.includes(link.getAttribute('href')) && link.getAttribute('href') !== '#') {
+  document.querySelectorAll('.nav-link, .dropdown-item').forEach(link => {
+    const href = link.getAttribute('href');
+    if(href && href !== '#' && href === pathName) {
       link.classList.add('active');
+      const parentDropdown = link.closest('.dropdown');
+      if (parentDropdown) {
+          const toggle = parentDropdown.querySelector('.dropdown-toggle');
+          if (toggle) toggle.classList.add('active');
+      }
     }
   });
   
@@ -57,10 +63,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Re-initialize active nav items
-        const currentPath = window.location.pathname;
-        document.querySelectorAll('.nav-link').forEach(link => {
-          if(link.getAttribute('href') && currentPath.includes(link.getAttribute('href')) && link.getAttribute('href') !== '#') {
+        let pathName = window.location.pathname.split('/').pop();
+        if (pathName === '') pathName = 'index.html';
+
+        document.querySelectorAll('.nav-link, .dropdown-item').forEach(link => {
+          const href = link.getAttribute('href');
+          if(href && href !== '#' && href === pathName) {
             link.classList.add('active');
+            const parentDropdown = link.closest('.dropdown');
+            if (parentDropdown) {
+                const toggle = parentDropdown.querySelector('.dropdown-toggle');
+                if (toggle) toggle.classList.add('active');
+            }
           }
         });
         
