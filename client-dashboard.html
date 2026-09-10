@@ -290,8 +290,36 @@
                     
                     <div class="dashboard-card mb-4">
                         <h5 class="mb-4">Revenue Growth Forecast</h5>
-                        <div class="bg-light rounded-3 d-flex align-items-center justify-content-center border" style="height: 300px; border-style: dashed !important;">
-                            <p class="text-secondary mb-0"><i class="bi bi-bar-chart-fill me-2"></i> Interactive Chart Placeholder</p>
+                        <div class="bg-white rounded-3 p-4 border" style="height: 300px;">
+                            <div class="d-flex h-100 align-items-end justify-content-around pb-4 position-relative pt-4">
+                                <!-- Grid lines -->
+                                <div class="position-absolute w-100 border-top" style="bottom: 25%; z-index: 0; border-color: rgba(0,0,0,0.05) !important;"></div>
+                                <div class="position-absolute w-100 border-top" style="bottom: 50%; z-index: 0; border-color: rgba(0,0,0,0.05) !important;"></div>
+                                <div class="position-absolute w-100 border-top" style="bottom: 75%; z-index: 0; border-color: rgba(0,0,0,0.05) !important;"></div>
+                                <div class="position-absolute w-100 border-top" style="bottom: 100%; z-index: 0; border-color: rgba(0,0,0,0.05) !important;"></div>
+                                
+                                <!-- Bars -->
+                                <div class="d-flex flex-column align-items-center position-relative z-1 h-100 justify-content-end" style="width: 12%;">
+                                    <span class="small mb-2 fw-bold text-success">$45k</span>
+                                    <div class="bg-success rounded-top w-100" style="height: 40%; opacity: 0.6; transition: all 0.3s;"></div>
+                                    <span class="small mt-3 fw-bold text-secondary">Q1</span>
+                                </div>
+                                <div class="d-flex flex-column align-items-center position-relative z-1 h-100 justify-content-end" style="width: 12%;">
+                                    <span class="small mb-2 fw-bold text-success">$65k</span>
+                                    <div class="bg-success rounded-top w-100" style="height: 60%; opacity: 0.75; transition: all 0.3s;"></div>
+                                    <span class="small mt-3 fw-bold text-secondary">Q2</span>
+                                </div>
+                                <div class="d-flex flex-column align-items-center position-relative z-1 h-100 justify-content-end" style="width: 12%;">
+                                    <span class="small mb-2 fw-bold text-success">$85k</span>
+                                    <div class="bg-success rounded-top w-100" style="height: 75%; opacity: 0.9; transition: all 0.3s;"></div>
+                                    <span class="small mt-3 fw-bold text-secondary">Q3</span>
+                                </div>
+                                <div class="d-flex flex-column align-items-center position-relative z-1 h-100 justify-content-end" style="width: 12%;">
+                                    <span class="small mb-2 fw-bold text-secondary">$110k</span>
+                                    <div class="rounded-top w-100" style="height: 95%; background-color: var(--secondary-color); opacity: 0.9; transition: all 0.3s;"></div>
+                                    <span class="small mt-3 fw-bold" style="color: var(--primary-color);">Q4 (Est)</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
