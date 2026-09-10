@@ -34,26 +34,28 @@
             </div>
             
             <div class="d-flex flex-column gap-2 h-100 nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="flex-grow: 1;">
-                <button class="sidebar-link active" id="v-pills-overview-tab" data-bs-toggle="pill" data-bs-target="#v-pills-overview" type="button" role="tab" aria-controls="v-pills-overview" aria-selected="true">
+                <button class="sidebar-link w-100 text-start active" id="v-pills-overview-tab" data-bs-toggle="pill" data-bs-target="#v-pills-overview" type="button" role="tab" aria-controls="v-pills-overview" aria-selected="true">
                     <i class="bi bi-grid-fill"></i> Overview
                 </button>
-                <button class="sidebar-link" id="v-pills-projects-tab" data-bs-toggle="pill" data-bs-target="#v-pills-projects" type="button" role="tab" aria-controls="v-pills-projects" aria-selected="false">
+                <button class="sidebar-link w-100 text-start" id="v-pills-projects-tab" data-bs-toggle="pill" data-bs-target="#v-pills-projects" type="button" role="tab" aria-controls="v-pills-projects" aria-selected="false">
                     <i class="bi bi-briefcase"></i> My Projects
                 </button>
-                <button class="sidebar-link" id="v-pills-reports-tab" data-bs-toggle="pill" data-bs-target="#v-pills-reports" type="button" role="tab" aria-controls="v-pills-reports" aria-selected="false">
+                <button class="sidebar-link w-100 text-start" id="v-pills-reports-tab" data-bs-toggle="pill" data-bs-target="#v-pills-reports" type="button" role="tab" aria-controls="v-pills-reports" aria-selected="false">
                     <i class="bi bi-file-earmark-text"></i> Reports & Insights
                 </button>
-                <button class="sidebar-link" id="v-pills-support-tab" data-bs-toggle="pill" data-bs-target="#v-pills-support" type="button" role="tab" aria-controls="v-pills-support" aria-selected="false">
+                <button class="sidebar-link w-100 text-start" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-support" type="button" role="tab" aria-controls="v-pills-support" aria-selected="false">
                     <i class="bi bi-chat-dots"></i> Support Team
                 </button>
-                <button class="sidebar-link" id="v-pills-billing-tab" data-bs-toggle="pill" data-bs-target="#v-pills-billing" type="button" role="tab" aria-controls="v-pills-billing" aria-selected="false">
+                <button class="sidebar-link w-100 text-start" id="v-pills-billing-tab" data-bs-toggle="pill" data-bs-target="#v-pills-billing" type="button" role="tab" aria-controls="v-pills-billing" aria-selected="false">
                     <i class="bi bi-credit-card"></i> Billing
                 </button>
+                
+                <div style="flex-grow: 1;"></div>
                 
                 <button class="sidebar-link mt-auto" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">
                     <i class="bi bi-gear"></i> Settings
                 </button>
-                <a href="index.html" class="sidebar-link text-decoration-none text-danger mb-3"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                <a href="login.html" class="sidebar-link text-decoration-none text-danger mb-3" onclick="localStorage.removeItem('userEmail')"><i class="bi bi-box-arrow-right"></i> Logout</a>
             </div>
         </aside>
 
@@ -63,27 +65,21 @@
             <header class="dashboard-navbar border-bottom">
                 <div class="d-flex align-items-center gap-3">
                     <button class="btn btn-light d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"><i class="bi bi-list fs-4"></i></button>
-                    <h4 class="mb-0 fw-bold d-none d-sm-block" id="navbar-title" style="color: var(--primary-color);">Dashboard Overview</h4>
+                    <h4 class="mb-0 fw-bold d-none d-sm-block" id="navbar-title" style="color: var(--primary-color);">Welcome back, Client</h4>
                 </div>
                 <div class="d-flex align-items-center gap-4">
-                    <div class="position-relative">
-                        <i class="bi bi-bell fs-5 text-secondary"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
-                    </div>
-                    <div class="d-flex align-items-center gap-2 cursor-pointer">
-                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: var(--primary-light) !important;">
-                            <span class="fw-bold">JD</span>
-                        </div>
-                        <div class="d-none d-md-block">
-                            <p class="mb-0 fw-bold small" style="color: var(--primary-color);">John Doe</p>
-                            <p class="mb-0 small text-secondary" style="font-size: 11px;">Acme Corp</p>
-                        </div>
+
+                    <div class="d-flex align-items-center cursor-pointer">
+                        <p class="mb-0 fw-bold" id="userEmailDisplay" style="color: var(--primary-color);">client@technova.com</p>
                     </div>
                 </div>
             </header>
 
             <!-- Dashboard Content -->
             <div class="dashboard-content">
+                <div class="d-sm-none mb-4">
+                    <h4 class="fw-bold" style="color: var(--primary-color);">Welcome back, Client</h4>
+                </div>
                 <div class="tab-content" id="v-pills-tabContent">
                 
                 <!-- Overview Tab -->
@@ -554,11 +550,23 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Update navbar title based on active tab
-        document.querySelectorAll('button[data-bs-toggle="pill"]').forEach(tab => {
-            tab.addEventListener('shown.bs.tab', event => {
-                const text = event.target.innerText.trim();
-                document.getElementById('navbar-title').innerText = text === 'Overview' ? 'Dashboard Overview' : text;
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedEmail = localStorage.getItem('userEmail');
+            if (savedEmail) {
+                document.getElementById('userEmailDisplay').innerText = savedEmail;
+            }
+
+            // Close offcanvas sidebar on mobile when a tab is clicked
+            document.querySelectorAll('.sidebar-link[data-bs-toggle="pill"]').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 992) {
+                        setTimeout(() => {
+                            const offcanvasEl = document.getElementById('sidebarMenu');
+                            const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+                            offcanvas.hide();
+                        }, 50); // Small delay to allow tab switch
+                    }
+                });
             });
         });
     </script>

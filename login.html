@@ -43,7 +43,7 @@
                     <label class="btn w-50 rounded-pill fw-bold" for="roleAdmin">Admin</label>
                 </div>
                 
-                <form class="needs-validation" novalidate id="loginForm" onsubmit="event.preventDefault(); const role = document.querySelector('input[name=\'role\']:checked').id; if(role === 'roleAdmin') { window.location.href='admin-dashboard.html'; } else { window.location.href='client-dashboard.html'; }">
+                <form class="needs-validation" novalidate id="loginForm" onsubmit="event.preventDefault(); const email = this.querySelector('input[type=\'email\']').value; localStorage.setItem('userEmail', email); const role = document.querySelector('input[name=\'role\']:checked').id; if(role === 'roleAdmin') { window.location.href='admin-dashboard.html'; } else { window.location.href='client-dashboard.html'; }">
                     <div class="mb-3">
                         <label class="form-label small fw-bold text-secondary">Email Address</label>
                         <input type="email" class="form-control form-control-stackly" required>

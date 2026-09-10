@@ -34,26 +34,28 @@
             </div>
             
             <div class="d-flex flex-column gap-2 h-100 nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="flex-grow: 1;">
-                <button class="sidebar-link active" id="v-pills-admin-overview-tab" data-bs-toggle="pill" data-bs-target="#v-pills-admin-overview" type="button" role="tab" aria-selected="true">
+                <button class="sidebar-link w-100 text-start active" id="v-pills-admin-overview-tab" data-bs-toggle="pill" data-bs-target="#v-pills-admin-overview" type="button" role="tab" aria-controls="v-pills-admin-overview" aria-selected="true">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </button>
-                <button class="sidebar-link" id="v-pills-clients-tab" data-bs-toggle="pill" data-bs-target="#v-pills-clients" type="button" role="tab" aria-selected="false">
+                <button class="sidebar-link w-100 text-start" id="v-pills-clients-tab" data-bs-toggle="pill" data-bs-target="#v-pills-clients" type="button" role="tab" aria-controls="v-pills-clients" aria-selected="false">
                     <i class="bi bi-people"></i> Clients
                 </button>
-                <button class="sidebar-link" id="v-pills-admin-projects-tab" data-bs-toggle="pill" data-bs-target="#v-pills-admin-projects" type="button" role="tab" aria-selected="false">
+                <button class="sidebar-link w-100 text-start" id="v-pills-admin-projects-tab" data-bs-toggle="pill" data-bs-target="#v-pills-admin-projects" type="button" role="tab" aria-controls="v-pills-admin-projects" aria-selected="false">
                     <i class="bi bi-kanban"></i> Projects
                 </button>
-                <button class="sidebar-link" id="v-pills-revenue-tab" data-bs-toggle="pill" data-bs-target="#v-pills-revenue" type="button" role="tab" aria-selected="false">
+                <button class="sidebar-link w-100 text-start" id="v-pills-revenue-tab" data-bs-toggle="pill" data-bs-target="#v-pills-revenue" type="button" role="tab" aria-controls="v-pills-revenue" aria-selected="false">
                     <i class="bi bi-graph-up"></i> Revenue
                 </button>
-                <button class="sidebar-link" id="v-pills-consultants-tab" data-bs-toggle="pill" data-bs-target="#v-pills-consultants" type="button" role="tab" aria-selected="false">
+                <button class="sidebar-link w-100 text-start" id="v-pills-consultants-tab" data-bs-toggle="pill" data-bs-target="#v-pills-consultants" type="button" role="tab" aria-controls="v-pills-consultants" aria-selected="false">
                     <i class="bi bi-person-badge"></i> Consultants
                 </button>
                 
-                <button class="sidebar-link mt-auto" id="v-pills-security-tab" data-bs-toggle="pill" data-bs-target="#v-pills-security" type="button" role="tab" aria-selected="false">
+                <div style="flex-grow: 1;"></div>
+                
+                <button class="sidebar-link mt-auto w-100 text-start" id="v-pills-security-tab" data-bs-toggle="pill" data-bs-target="#v-pills-security" type="button" role="tab" aria-selected="false">
                     <i class="bi bi-shield-lock"></i> Security
                 </button>
-                <a href="index.html" class="sidebar-link text-decoration-none text-danger mb-3"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                <a href="login.html" class="sidebar-link text-decoration-none text-danger mb-3" onclick="localStorage.removeItem('userEmail')"><i class="bi bi-box-arrow-right"></i> Logout</a>
             </div>
         </aside>
 
@@ -63,30 +65,21 @@
             <header class="dashboard-navbar border-bottom">
                 <div class="d-flex align-items-center gap-3">
                     <button class="btn btn-light d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"><i class="bi bi-list fs-4"></i></button>
-                    <h4 class="mb-0 fw-bold d-none d-sm-block" id="navbar-title" style="color: var(--primary-color);">Admin Overview</h4>
+                    <h4 class="mb-0 fw-bold d-none d-sm-block" id="navbar-title" style="color: var(--primary-color);">Welcome back, Admin</h4>
                 </div>
                 <div class="d-flex align-items-center gap-4">
-                    <div class="position-relative">
-                        <i class="bi bi-envelope fs-5 text-secondary"></i>
-                    </div>
-                    <div class="position-relative">
-                        <i class="bi bi-bell fs-5 text-secondary"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
-                    </div>
-                    <div class="d-flex align-items-center gap-2 cursor-pointer">
-                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: var(--text-dark) !important;">
-                            <span class="fw-bold">AM</span>
-                        </div>
-                        <div class="d-none d-md-block">
-                            <p class="mb-0 fw-bold small" style="color: var(--primary-color);">Admin Manager</p>
-                            <p class="mb-0 small text-secondary" style="font-size: 11px;">System Access</p>
-                        </div>
+
+                    <div class="d-flex align-items-center cursor-pointer">
+                        <p class="mb-0 fw-bold" id="userEmailDisplay" style="color: var(--primary-color);">admin@stackly.com</p>
                     </div>
                 </div>
             </header>
 
             <!-- Dashboard Content -->
             <div class="dashboard-content">
+                <div class="d-sm-none mb-4">
+                    <h4 class="fw-bold" style="color: var(--primary-color);">Welcome back, Admin</h4>
+                </div>
                 <div class="tab-content" id="v-pills-tabContent">
                 
                 <!-- Dashboard Overview Tab -->
@@ -783,11 +776,23 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Update navbar title based on active tab
-        document.querySelectorAll('button[data-bs-toggle="pill"]').forEach(tab => {
-            tab.addEventListener('shown.bs.tab', event => {
-                const text = event.target.innerText.trim();
-                document.getElementById('navbar-title').innerText = text === 'Dashboard' ? 'Admin Overview' : text;
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedEmail = localStorage.getItem('userEmail');
+            if (savedEmail) {
+                document.getElementById('userEmailDisplay').innerText = savedEmail;
+            }
+
+            // Close offcanvas sidebar on mobile when a tab is clicked
+            document.querySelectorAll('.sidebar-link[data-bs-toggle="pill"]').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 992) {
+                        setTimeout(() => {
+                            const offcanvasEl = document.getElementById('sidebarMenu');
+                            const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+                            offcanvas.hide();
+                        }, 50); // Small delay to allow tab switch
+                    }
+                });
             });
         });
     </script>
