@@ -101,6 +101,35 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(response => response.text())
       .then(data => {
         footerPlaceholder.outerHTML = data;
+        
+        // Add Newsletter Form Logic
+        const newsletterForm = document.getElementById('newsletterForm');
+        const newsletterMsg = document.getElementById('newsletterMsg');
+        if (newsletterForm && newsletterMsg) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if(this.checkValidity()) {
+                    newsletterMsg.classList.remove('d-none');
+                    setTimeout(() => {
+                        newsletterForm.reset();
+                        newsletterMsg.classList.add('d-none');
+                        this.classList.remove('was-validated');
+                        window.location.href = '404.html';
+                    }, 1500);
+                } else {
+                    this.classList.add('was-validated');
+                }
+            });
+
+            // Handle bfcache when user clicks "Go Back" from 404 page
+            window.addEventListener('pageshow', function(event) {
+                if (event.persisted) {
+                    newsletterForm.reset();
+                    newsletterMsg.classList.add('d-none');
+                    newsletterForm.classList.remove('was-validated');
+                }
+            });
+        }
       })
       .catch(error => console.error('Error loading footer:', error));
   }
