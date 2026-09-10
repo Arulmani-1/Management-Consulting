@@ -55,7 +55,7 @@
                 <button class="sidebar-link mt-auto w-100 text-start" id="v-pills-security-tab" data-bs-toggle="pill" data-bs-target="#v-pills-security" type="button" role="tab" aria-selected="false">
                     <i class="bi bi-shield-lock"></i> Security
                 </button>
-                <a href="login.html" class="sidebar-link text-decoration-none text-danger mb-3" onclick="localStorage.removeItem('userEmail')"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                <a href="login.html" class="sidebar-link text-decoration-none text-danger mb-3" onclick="localStorage.removeItem('userEmail'); localStorage.removeItem('userFirstName'); localStorage.removeItem('userLastName'); localStorage.removeItem('userRole');"><i class="bi bi-box-arrow-right"></i> Logout</a>
             </div>
         </aside>
 
@@ -65,7 +65,7 @@
             <header class="dashboard-navbar border-bottom">
                 <div class="d-flex align-items-center gap-3">
                     <button class="btn btn-light d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"><i class="bi bi-list fs-4"></i></button>
-                    <h4 class="mb-0 fw-bold d-none d-sm-block" id="navbar-title" style="color: var(--primary-color);">Welcome back, Admin</h4>
+                    <h4 class="mb-0 fw-bold d-none d-sm-block welcome-text" id="navbar-title" style="color: var(--primary-color);">Welcome back, Admin</h4>
                 </div>
                 <div class="d-flex align-items-center gap-4">
 
@@ -78,7 +78,7 @@
             <!-- Dashboard Content -->
             <div class="dashboard-content">
                 <div class="d-sm-none mb-4">
-                    <h4 class="fw-bold" style="color: var(--primary-color);">Welcome back, Admin</h4>
+                    <h4 class="fw-bold welcome-text" style="color: var(--primary-color);">Welcome back, Admin</h4>
                 </div>
                 <div class="tab-content" id="v-pills-tabContent">
                 
@@ -780,6 +780,14 @@
             const savedEmail = localStorage.getItem('userEmail');
             if (savedEmail) {
                 document.getElementById('userEmailDisplay').innerText = savedEmail;
+            }
+            
+            const firstName = localStorage.getItem('userFirstName');
+            const lastName = localStorage.getItem('userLastName');
+            if (firstName && lastName) {
+                document.querySelectorAll('.welcome-text').forEach(el => {
+                    el.innerText = `Welcome back, ${firstName} ${lastName}`;
+                });
             }
 
             // Close offcanvas sidebar on mobile when a tab is clicked

@@ -22,34 +22,31 @@
                 <h2 class="fw-bold mb-1">Create Your Account</h2>
                 <p class="text-secondary mb-4">Join Stackly and access premium consulting resources.</p>
                 
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" id="signupForm" novalidate>
                     <div class="row g-3">
+                        <div class="col-12 mb-2">
+                            <label class="form-label small fw-bold text-secondary d-block mb-2">Select Your Role</label>
+                            <div class="role-toggle d-flex bg-white border rounded-pill p-1">
+                                <input type="radio" class="btn-check" name="role" id="roleClient" value="client" checked>
+                                <label class="btn rounded-pill w-50 fw-bold border-0 py-2" for="roleClient">Client</label>
+                            
+                                <input type="radio" class="btn-check" name="role" id="roleAdmin" value="admin">
+                                <label class="btn rounded-pill w-50 fw-bold border-0 py-2" for="roleAdmin">Admin</label>
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <label class="form-label small fw-bold text-secondary">First Name</label>
-                            <input type="text" class="form-control form-control-stackly" required>
+                            <input type="text" class="form-control form-control-stackly" id="firstName" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label small fw-bold text-secondary">Last Name</label>
-                            <input type="text" class="form-control form-control-stackly" required>
+                            <input type="text" class="form-control form-control-stackly" id="lastName" required>
                         </div>
                         <div class="col-12">
                             <label class="form-label small fw-bold text-secondary">Email Address</label>
-                            <input type="email" class="form-control form-control-stackly" required>
+                            <input type="email" class="form-control form-control-stackly" id="email" required>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label small fw-bold text-secondary">Company</label>
-                            <input type="text" class="form-control form-control-stackly" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label small fw-bold text-secondary">Role</label>
-                            <select class="form-select form-control-stackly" required>
-                                <option value="" disabled selected>Select Role</option>
-                                <option value="1">Executive / C-Level</option>
-                                <option value="2">Director / Manager</option>
-                                <option value="3">Professional</option>
-                                <option value="4">Other</option>
-                            </select>
-                        </div>
+
                         <div class="col-md-6">
                             <label class="form-label small fw-bold text-secondary">Password</label>
                             <input type="password" class="form-control form-control-stackly" required>
@@ -111,5 +108,40 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/forms.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const signupForm = document.getElementById('signupForm');
+            if (signupForm) {
+                // Prevent forms.js from taking over this specific form by handling it here and stopping propagation
+                signupForm.addEventListener('submit', (event) => {
+                    if (signupForm.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        
+                        // Save data
+                        const firstName = document.getElementById('firstName').value;
+                        const lastName = document.getElementById('lastName').value;
+                        const email = document.getElementById('email').value;
+                        const role = document.querySelector('input[name="role"]:checked').value;
+                        
+                        localStorage.setItem('userFirstName', firstName);
+                        localStorage.setItem('userLastName', lastName);
+                        localStorage.setItem('userEmail', email);
+                        localStorage.setItem('userRole', role);
+                        
+                        // Simulate loading
+                        const btn = signupForm.querySelector('button[type="submit"]');
+                        const originalText = btn.innerHTML;
+                        btn.innerHTML = '<i class="bi bi-arrow-repeat spin"></i> Creating Account...';
+                        btn.disabled = true;
+                        
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 1000);
+                    }
+                }, true); // Use capture phase to run before forms.js
+            }
+        });
+    </script>
 </body>
 </html>
