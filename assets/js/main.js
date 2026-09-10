@@ -1,5 +1,18 @@
 // main.js
 
+// Preloader logic: remove after 2 seconds
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            preloader.classList.add('hidden');
+            setTimeout(() => {
+                preloader.remove();
+            }, 500);
+        }
+    }, 2000);
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   // Sticky Navbar
   const navbar = document.querySelector('.navbar-stackly');
