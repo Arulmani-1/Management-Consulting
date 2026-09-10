@@ -35,7 +35,7 @@
                         <div class="d-flex align-items-center mb-4">
                             <i class="bi bi-telephone text-accent fs-4 me-3"></i>
                             <div>
-                                <span class="d-block text-white fw-bold">+1 (555) 123-4567</span>
+                                <span class="d-block text-white fw-bold">+91 98765 43210</span>
                                 <span class="small text-light">Mon-Fri 9am-6pm</span>
                             </div>
                         </div>
@@ -51,8 +51,8 @@
                         <div class="d-flex align-items-center mb-5">
                             <i class="bi bi-geo-alt text-accent fs-4 me-3"></i>
                             <div>
-                                <span class="d-block text-white fw-bold">100 Corporate Way</span>
-                                <span class="small text-light">Suite 500, New York, NY 10001</span>
+                                <span class="d-block text-white fw-bold">Stackly, MMR Complex</span>
+                                <span class="small text-light">Periyakollappatty, Chinna Thirupathi, Salem, TN 636008, India</span>
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                 <!-- Right: Form -->
                 <div class="col-lg-7 p-5">
                     <h3 class="mb-4">Send a Message</h3>
-                    <form class="needs-validation" novalidate>
+                    <form class="needs-validation" id="contactForm" novalidate>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold text-secondary">Full Name</label>
@@ -81,10 +81,12 @@
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold text-secondary">Company</label>
                                 <input type="text" class="form-control form-control-stackly" required>
+                                <div class="invalid-feedback">Please provide your company.</div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold text-secondary">Phone Number</label>
-                                <input type="tel" class="form-control form-control-stackly">
+                                <input type="tel" class="form-control form-control-stackly" required>
+                                <div class="invalid-feedback">Please provide your phone number.</div>
                             </div>
                             <div class="col-12">
                                 <label class="form-label small fw-bold text-secondary">Service Required</label>
@@ -95,10 +97,12 @@
                                     <option value="3">Operations Management</option>
                                     <option value="4">Talent & Organization</option>
                                 </select>
+                                <div class="invalid-feedback">Please select a service.</div>
                             </div>
                             <div class="col-12">
                                 <label class="form-label small fw-bold text-secondary">Message</label>
                                 <textarea class="form-control form-control-stackly" rows="4" required></textarea>
+                                <div class="invalid-feedback">Please enter your message.</div>
                             </div>
                             <div class="col-12 mt-4">
                                 <button class="btn btn-primary-stackly w-100 justify-content-center" type="submit">Send Message</button>
@@ -111,8 +115,8 @@
     </section>
 
     <!-- Map iframe -->
-    <section class="w-100">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1683229712571!5m2!1sen!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <section class="container mb-5 overflow-hidden rounded-4 shadow-sm px-0">
+        <iframe src="https://maps.google.com/maps?q=MMR%20Complex,%20Periyakollappatty,%20Salem&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
     <div id="footer-placeholder"></div>
 
@@ -120,5 +124,35 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/forms.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', (event) => {
+                    if (!contactForm.checkValidity()) {
+                        // Let Bootstrap handle showing invalid-feedback
+                        return;
+                    }
+                    
+                    // Form is valid, prevent default and forms.js
+                    event.preventDefault();
+                    event.stopPropagation();
+                    
+                    // Simulate loading and redirect
+                    const btn = contactForm.querySelector('button[type="submit"]');
+                    btn.innerHTML = '<i class="bi bi-arrow-repeat spin"></i> Sending...';
+                    btn.disabled = true;
+                    
+                    setTimeout(() => {
+                        contactForm.reset();
+                        contactForm.classList.remove('was-validated');
+                        btn.innerHTML = 'Send Message';
+                        btn.disabled = false;
+                        window.location.href = '404.html';
+                    }, 500);
+                }, true); // Use capture phase to intercept before forms.js
+            }
+        });
+    </script>
 </body>
 </html>
