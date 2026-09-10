@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard | Stackly</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .sidebar-link {
+            text-align: left;
+            background: transparent;
+            border: none;
+            width: calc(100% - 30px);
+        }
+        .sidebar-link.active {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: var(--secondary-color) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar p-3 flex-column offcanvas-lg offcanvas-start" tabindex="-1" id="sidebarMenu">
+            <div class="d-flex justify-content-between align-items-start mb-5 mt-2 px-3">
+                <div>
+                    <a href="index.html" class="text-decoration-none"><img src="assets/images/logo.webp" alt="Stackly Logo" style="height: 35px;"></a>
+                    <div class="mt-2 text-uppercase fw-bold" style="color: #ff6b9d; font-size: 12px; letter-spacing: 1.5px;">Client Portal</div>
+                </div>
+                <button type="button" class="btn-close btn-close-white d-lg-none" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+            </div>
+            
+            <div class="d-flex flex-column gap-2 h-100 nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="flex-grow: 1;">
+                <button class="sidebar-link active" id="v-pills-overview-tab" data-bs-toggle="pill" data-bs-target="#v-pills-overview" type="button" role="tab" aria-controls="v-pills-overview" aria-selected="true">
+                    <i class="bi bi-grid-fill"></i> Overview
+                </button>
+                <button class="sidebar-link" id="v-pills-projects-tab" data-bs-toggle="pill" data-bs-target="#v-pills-projects" type="button" role="tab" aria-controls="v-pills-projects" aria-selected="false">
+                    <i class="bi bi-briefcase"></i> My Projects
+                </button>
+                <button class="sidebar-link" id="v-pills-reports-tab" data-bs-toggle="pill" data-bs-target="#v-pills-reports" type="button" role="tab" aria-controls="v-pills-reports" aria-selected="false">
+                    <i class="bi bi-file-earmark-text"></i> Reports & Insights
+                </button>
+                <button class="sidebar-link" id="v-pills-support-tab" data-bs-toggle="pill" data-bs-target="#v-pills-support" type="button" role="tab" aria-controls="v-pills-support" aria-selected="false">
+                    <i class="bi bi-chat-dots"></i> Support Team
+                </button>
+                <button class="sidebar-link" id="v-pills-billing-tab" data-bs-toggle="pill" data-bs-target="#v-pills-billing" type="button" role="tab" aria-controls="v-pills-billing" aria-selected="false">
+                    <i class="bi bi-credit-card"></i> Billing
+                </button>
+                
+                <button class="sidebar-link mt-auto" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+                    <i class="bi bi-gear"></i> Settings
+                </button>
+                <a href="index.html" class="sidebar-link text-decoration-none text-danger mb-3"><i class="bi bi-box-arrow-right"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Navbar -->
+            <header class="dashboard-navbar border-bottom">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-light d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"><i class="bi bi-list fs-4"></i></button>
+                    <h4 class="mb-0 fw-bold d-none d-sm-block" id="navbar-title" style="color: var(--primary-color);">Dashboard Overview</h4>
+                </div>
+                <div class="d-flex align-items-center gap-4">
+                    <div class="position-relative">
+                        <i class="bi bi-bell fs-5 text-secondary"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 cursor-pointer">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: var(--primary-light) !important;">
+                            <span class="fw-bold">JD</span>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <p class="mb-0 fw-bold small" style="color: var(--primary-color);">John Doe</p>
+                            <p class="mb-0 small text-secondary" style="font-size: 11px;">Acme Corp</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <div class="tab-content" id="v-pills-tabContent">
+                
+                <!-- Overview Tab -->
+                <div class="tab-pane fade show active" id="v-pills-overview" role="tabpanel" aria-labelledby="v-pills-overview-tab" tabindex="0">
+                    <div class="bg-dark-green text-white rounded-4 p-4 p-lg-5 mb-4 position-relative overflow-hidden">
+                        <div class="position-relative z-2 w-75">
+                            <h2 class="text-white mb-2">Welcome back, John!</h2>
+                            <p class="mb-4 text-white opacity-75">Your quarterly strategic review is ready. Our team has identified 3 new opportunities for growth.</p>
+                            <button class="btn btn-primary-stackly btn-sm py-2 px-4" onclick="document.getElementById('v-pills-reports-tab').click()">View Report</button>
+                        </div>
+                        <div class="position-absolute end-0 top-0 h-100 w-50" style="background: radial-gradient(circle, rgba(187,247,208,0.2) 0%, rgba(13,41,34,0) 70%);"></div>
+                    </div>
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="dashboard-card d-flex flex-column justify-content-between">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <p class="text-secondary small fw-bold mb-1">Active Projects</p>
+                                        <h3 class="mb-0" style="color: var(--primary-color);">2</h3>
+                                    </div>
+                                    <div class="stat-icon bg-success bg-opacity-10 text-success">
+                                        <i class="bi bi-briefcase"></i>
+                                    </div>
+                                </div>
+                                <p class="mb-0 small text-success fw-bold"><i class="bi bi-arrow-up-short"></i> On Track</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="dashboard-card d-flex flex-column justify-content-between">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <p class="text-secondary small fw-bold mb-1">Total ROI</p>
+                                        <h3 class="mb-0" style="color: var(--primary-color);">+14.5%</h3>
+                                    </div>
+                                    <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                                        <i class="bi bi-graph-up-arrow"></i>
+                                    </div>
+                                </div>
+                                <p class="mb-0 small text-success fw-bold"><i class="bi bi-arrow-up-short"></i> vs Last Qtr</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="dashboard-card d-flex flex-column justify-content-between">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <p class="text-secondary small fw-bold mb-1">Unread Reports</p>
+                                        <h3 class="mb-0" style="color: var(--primary-color);">1</h3>
+                                    </div>
+                                    <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+                                        <i class="bi bi-file-earmark-text"></i>
+                                    </div>
+                                </div>
+                                <p class="mb-0 small text-secondary">Q3 Strategy Doc</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="dashboard-card d-flex flex-column justify-content-between">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <p class="text-secondary small fw-bold mb-1">Upcoming Meetings</p>
+                                        <h3 class="mb-0" style="color: var(--primary-color);">1</h3>
+                                    </div>
+                                    <div class="stat-icon bg-info bg-opacity-10 text-info">
+                                        <i class="bi bi-calendar-event"></i>
+                                    </div>
+                                </div>
+                                <p class="mb-0 small text-secondary">Tomorrow, 10:00 AM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-lg-8">
+                            <div class="dashboard-card">
+                                <h5 class="mb-4">Recent Project Activity</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Project</th>
+                                                <th>Status</th>
+                                                <th>Last Update</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><p class="fw-bold mb-0" style="color: var(--primary-color);">Market Expansion Strategy</p><small class="text-secondary">Phase 2: Market Analysis</small></td>
+                                                <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill px-3 py-2">In Progress</span></td>
+                                                <td>Today, 09:30 AM</td>
+                                                <td><button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="document.getElementById('v-pills-projects-tab').click()">View Details</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><p class="fw-bold mb-0" style="color: var(--primary-color);">Supply Chain Optimization</p><small class="text-secondary">Phase 1: Auditing</small></td>
+                                                <td><span class="badge bg-warning bg-opacity-25 text-warning rounded-pill px-3 py-2">Review Required</span></td>
+                                                <td>Yesterday</td>
+                                                <td><button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="document.getElementById('v-pills-projects-tab').click()">View Details</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><p class="fw-bold mb-0" style="color: var(--primary-color);">Digital Transformation</p><small class="text-secondary">Phase 4: Implementation</small></td>
+                                                <td><span class="badge bg-primary bg-opacity-25 text-primary rounded-pill px-3 py-2">Completed</span></td>
+                                                <td>Last Week</td>
+                                                <td><button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="document.getElementById('v-pills-reports-tab').click()">View Report</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="dashboard-card">
+                                <h5 class="mb-4">Your Consulting Team</h5>
+                                <div class="d-flex align-items-center gap-3 mb-4 p-3 rounded-3" style="background-color: var(--off-white); border: 1px solid #e5e7eb;">
+                                    <img src="https://ui-avatars.com/api/?name=Sarah+Miller&background=random" alt="Lead Consultant" class="rounded-circle object-fit-cover" width="50" height="50">
+                                    <div>
+                                        <p class="mb-0 fw-bold" style="color: var(--primary-color);">Sarah Miller</p>
+                                        <p class="mb-0 small text-secondary">Lead Strategist</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-light rounded-circle ms-auto" onclick="document.getElementById('v-pills-support-tab').click()"><i class="bi bi-chat-text"></i></button>
+                                </div>
+                                <div class="d-flex align-items-center gap-3 mb-4 p-3 rounded-3" style="background-color: var(--off-white); border: 1px solid #e5e7eb;">
+                                    <img src="https://ui-avatars.com/api/?name=David+Chen&background=random" alt="Data Analyst" class="rounded-circle object-fit-cover" width="50" height="50">
+                                    <div>
+                                        <p class="mb-0 fw-bold" style="color: var(--primary-color);">David Chen</p>
+                                        <p class="mb-0 small text-secondary">Data Analyst</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-light rounded-circle ms-auto" onclick="document.getElementById('v-pills-support-tab').click()"><i class="bi bi-chat-text"></i></button>
+                                </div>
+                                <button class="btn btn-outline-secondary w-100 rounded-pill mt-2">Schedule Meeting</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Tab -->
+                <div class="tab-pane fade" id="v-pills-projects" role="tabpanel" aria-labelledby="v-pills-projects-tab" tabindex="0">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="mb-0" style="color: var(--primary-color);">My Projects</h3>
+                        <button class="btn btn-primary-stackly btn-sm"><i class="bi bi-plus-lg"></i> New Request</button>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="dashboard-card">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5 style="color: var(--primary-color);">Market Expansion Strategy</h5>
+                                    <span class="badge bg-success bg-opacity-25 text-success rounded-pill px-3 py-2">In Progress</span>
+                                </div>
+                                <p class="text-secondary small mb-4">Comprehensive analysis of European markets to identify entry opportunities for Q4.</p>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="small fw-bold">Phase 2: Market Analysis</span>
+                                        <span class="small text-secondary">45%</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar" role="progressbar" style="width: 45%; background-color: var(--secondary-color);" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex -space-x-2">
+                                        <img src="https://ui-avatars.com/api/?name=Sarah+Miller&background=random" class="rounded-circle border border-2 border-white" width="30" height="30" style="margin-right: -10px; position: relative; z-index: 2;">
+                                        <img src="https://ui-avatars.com/api/?name=John+Doe&background=random" class="rounded-circle border border-2 border-white" width="30" height="30" style="position: relative; z-index: 1;">
+                                    </div>
+                                    <small class="text-secondary"><i class="bi bi-clock me-1"></i> Updated 2h ago</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="dashboard-card">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5 style="color: var(--primary-color);">Supply Chain Optimization</h5>
+                                    <span class="badge bg-warning bg-opacity-25 text-warning rounded-pill px-3 py-2">Review Required</span>
+                                </div>
+                                <p class="text-secondary small mb-4">Identifying bottlenecks and cost-saving measures across APAC distribution network.</p>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="small fw-bold">Phase 1: Auditing</span>
+                                        <span class="small text-secondary">15%</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex -space-x-2">
+                                        <img src="https://ui-avatars.com/api/?name=David+Chen&background=random" class="rounded-circle border border-2 border-white" width="30" height="30">
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-warning rounded-pill px-3">Review Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Tab -->
+                <div class="tab-pane fade" id="v-pills-reports" role="tabpanel" aria-labelledby="v-pills-reports-tab" tabindex="0">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="mb-0" style="color: var(--primary-color);">Reports & Insights</h3>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown">
+                                Last 30 Days
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">This Quarter</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card mb-4">
+                        <h5 class="mb-4">Revenue Growth Forecast</h5>
+                        <div class="bg-light rounded-3 d-flex align-items-center justify-content-center border" style="height: 300px; border-style: dashed !important;">
+                            <p class="text-secondary mb-0"><i class="bi bi-bar-chart-fill me-2"></i> Interactive Chart Placeholder</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="dashboard-card text-center p-4">
+                                <div class="bg-danger bg-opacity-10 text-danger rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-file-pdf fs-3"></i>
+                                </div>
+                                <h6>Q3 Strategy Document</h6>
+                                <p class="small text-secondary mb-3">Published: Oct 12, 2026</p>
+                                <button class="btn btn-outline-secondary btn-sm rounded-pill w-100"><i class="bi bi-download me-1"></i> Download PDF</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="dashboard-card text-center p-4">
+                                <div class="bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-file-earmark-spreadsheet fs-3"></i>
+                                </div>
+                                <h6>Market Analysis Data</h6>
+                                <p class="small text-secondary mb-3">Published: Oct 05, 2026</p>
+                                <button class="btn btn-outline-secondary btn-sm rounded-pill w-100"><i class="bi bi-download me-1"></i> Export Excel</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="dashboard-card text-center p-4">
+                                <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-file-earmark-slides fs-3"></i>
+                                </div>
+                                <h6>Board Presentation</h6>
+                                <p class="small text-secondary mb-3">Published: Sep 28, 2026</p>
+                                <button class="btn btn-outline-secondary btn-sm rounded-pill w-100"><i class="bi bi-eye me-1"></i> View Slides</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Tab -->
+                <div class="tab-pane fade" id="v-pills-support" role="tabpanel" aria-labelledby="v-pills-support-tab" tabindex="0">
+                    <h3 class="mb-4" style="color: var(--primary-color);">Support Team</h3>
+                    <div class="row g-4">
+                        <div class="col-lg-4">
+                            <div class="dashboard-card">
+                                <h5 class="mb-4">Your Contacts</h5>
+                                <div class="nav flex-column nav-pills me-3 w-100 gap-2" id="v-pills-tab-chat" role="tablist" aria-orientation="vertical">
+                                    <button class="nav-link active text-start d-flex align-items-center gap-3 p-3 bg-light text-dark rounded-3 border w-100" type="button">
+                                        <img src="https://ui-avatars.com/api/?name=Sarah+Miller&background=random" class="rounded-circle" width="40" height="40">
+                                        <div>
+                                            <p class="mb-0 fw-bold">Sarah Miller</p>
+                                            <p class="mb-0 small text-secondary">Lead Strategist</p>
+                                        </div>
+                                    </button>
+                                    <button class="nav-link text-start d-flex align-items-center gap-3 p-3 text-dark rounded-3 w-100" type="button">
+                                        <img src="https://ui-avatars.com/api/?name=David+Chen&background=random" class="rounded-circle" width="40" height="40">
+                                        <div>
+                                            <p class="mb-0 fw-bold">David Chen</p>
+                                            <p class="mb-0 small text-secondary">Data Analyst</p>
+                                        </div>
+                                    </button>
+                                    <button class="nav-link text-start d-flex align-items-center gap-3 p-3 text-dark rounded-3 w-100" type="button">
+                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: var(--secondary-color) !important;">
+                                            <i class="bi bi-headset fs-5 text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <p class="mb-0 fw-bold">General Support</p>
+                                            <p class="mb-0 small text-secondary">Usually replies in 2h</p>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="dashboard-card d-flex flex-column" style="min-height: 500px;">
+                                <div class="d-flex align-items-center gap-3 border-bottom pb-3 mb-3">
+                                    <img src="https://ui-avatars.com/api/?name=Sarah+Miller&background=random" class="rounded-circle" width="40" height="40">
+                                    <div>
+                                        <p class="mb-0 fw-bold">Sarah Miller</p>
+                                        <p class="mb-0 small text-success"><i class="bi bi-circle-fill" style="font-size: 8px;"></i> Online</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex-grow-1 overflow-auto d-flex flex-column gap-3 mb-3">
+                                    <!-- Chat bubble -->
+                                    <div class="d-flex gap-3">
+                                        <img src="https://ui-avatars.com/api/?name=Sarah+Miller&background=random" class="rounded-circle mt-1" width="30" height="30">
+                                        <div class="bg-light p-3 rounded-3" style="max-width: 75%;">
+                                            <p class="mb-1 small">Hi John, I've reviewed the Q3 reports. We should discuss the market expansion phase when you have a moment.</p>
+                                            <p class="mb-0 text-secondary" style="font-size: 10px;">10:24 AM</p>
+                                        </div>
+                                    </div>
+                                    <!-- Own chat bubble -->
+                                    <div class="d-flex gap-3 flex-row-reverse">
+                                        <div class="bg-primary text-white p-3 rounded-3" style="max-width: 75%; background-color: var(--primary-light) !important;">
+                                            <p class="mb-1 small text-white">Thanks Sarah. Let's schedule a quick sync for tomorrow morning.</p>
+                                            <p class="mb-0 text-light opacity-75 text-end" style="font-size: 10px;">10:30 AM</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-stackly border-end-0" placeholder="Type your message...">
+                                    <button class="btn btn-outline-secondary border border-start-0" type="button"><i class="bi bi-paperclip"></i></button>
+                                    <button class="btn btn-primary-stackly m-0 px-3 py-2 border-start-0" type="button" style="border-radius: 0 8px 8px 0;"><i class="bi bi-send"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Billing Tab -->
+                <div class="tab-pane fade" id="v-pills-billing" role="tabpanel" aria-labelledby="v-pills-billing-tab" tabindex="0">
+                    <h3 class="mb-4" style="color: var(--primary-color);">Billing & Invoices</h3>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="dashboard-card bg-dark-green text-white">
+                                <h6 class="text-white opacity-75 mb-3">Current Plan</h6>
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h2 class="text-white mb-0">Enterprise Suite</h2>
+                                    <span class="badge bg-white text-dark rounded-pill px-3 py-2">Active</span>
+                                </div>
+                                <p class="text-white mb-4">Renews on Nov 01, 2026 for $4,500/month.</p>
+                                <button class="btn btn-outline-stackly btn-sm">Manage Plan</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="dashboard-card">
+                                <h6 class="text-secondary mb-3">Payment Method</h6>
+                                <div class="d-flex align-items-center gap-3 p-3 border rounded-3 mb-3">
+                                    <div class="bg-light p-2 rounded"><i class="bi bi-credit-card-2-front fs-4 text-primary"></i></div>
+                                    <div>
+                                        <p class="mb-0 fw-bold">Mastercard ending in 4242</p>
+                                        <p class="mb-0 small text-secondary">Expires 12/28</p>
+                                    </div>
+                                    <span class="badge bg-light text-secondary ms-auto">Default</span>
+                                </div>
+                                <button class="btn btn-outline-secondary btn-sm rounded-pill"><i class="bi bi-plus"></i> Add Payment Method</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h5 class="mb-4">Billing History</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Invoice</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Oct 01, 2026</td>
+                                        <td>Enterprise Suite - Monthly</td>
+                                        <td class="fw-bold">$4,500.00</td>
+                                        <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill">Paid</span></td>
+                                        <td><button class="btn btn-sm btn-light rounded-circle"><i class="bi bi-download"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sep 01, 2026</td>
+                                        <td>Enterprise Suite - Monthly</td>
+                                        <td class="fw-bold">$4,500.00</td>
+                                        <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill">Paid</span></td>
+                                        <td><button class="btn btn-sm btn-light rounded-circle"><i class="bi bi-download"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Aug 15, 2026</td>
+                                        <td>Market Expansion Add-on</td>
+                                        <td class="fw-bold">$1,200.00</td>
+                                        <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill">Paid</span></td>
+                                        <td><button class="btn btn-sm btn-light rounded-circle"><i class="bi bi-download"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">
+                    <h3 class="mb-4" style="color: var(--primary-color);">Account Settings</h3>
+                    
+                    <div class="row g-4">
+                        <div class="col-lg-3">
+                            <div class="nav flex-column nav-pills dashboard-card p-3 gap-2" role="tablist">
+                                <button class="nav-link active text-start" data-bs-toggle="pill" type="button">Profile</button>
+                                <button class="nav-link text-start" data-bs-toggle="pill" type="button">Security</button>
+                                <button class="nav-link text-start" data-bs-toggle="pill" type="button">Notifications</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="dashboard-card">
+                                <h5 class="mb-4">Profile Information</h5>
+                                <div class="d-flex align-items-center gap-4 mb-4 pb-4 border-bottom">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; background-color: var(--primary-light) !important; font-size: 24px;">
+                                        <span class="fw-bold">JD</span>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-outline-secondary btn-sm rounded-pill mb-2">Change Avatar</button>
+                                        <p class="small text-secondary mb-0">JPG, GIF or PNG. Max size of 800K</p>
+                                    </div>
+                                </div>
+                                
+                                <form>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-bold text-secondary">First Name</label>
+                                            <input type="text" class="form-control form-control-stackly" value="John">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-bold text-secondary">Last Name</label>
+                                            <input type="text" class="form-control form-control-stackly" value="Doe">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-bold text-secondary">Email Address</label>
+                                            <input type="email" class="form-control form-control-stackly" value="john.doe@acmecorp.com">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-bold text-secondary">Phone Number</label>
+                                            <input type="text" class="form-control form-control-stackly" value="+1 (555) 123-4567">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label small fw-bold text-secondary">Company Name</label>
+                                            <input type="text" class="form-control form-control-stackly" value="Acme Corporation">
+                                        </div>
+                                        <div class="col-12 mt-4">
+                                            <button type="button" class="btn btn-primary-stackly">Save Changes</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+
+                <!-- Footer for all tabs -->
+                <footer class="mt-5 text-center">
+                    <p class="small text-secondary">&copy; 2026 Stackly Consulting. All rights reserved.</p>
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Update navbar title based on active tab
+        document.querySelectorAll('button[data-bs-toggle="pill"]').forEach(tab => {
+            tab.addEventListener('shown.bs.tab', event => {
+                const text = event.target.innerText.trim();
+                document.getElementById('navbar-title').innerText = text === 'Overview' ? 'Dashboard Overview' : text;
+            });
+        });
+    </script>
+</body>
+</html>

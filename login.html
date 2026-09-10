@@ -14,8 +14,10 @@
     <div class="split-screen flex-column flex-lg-row">
         <!-- Left: Image -->
         <div class="split-left split-bg d-none d-lg-flex position-relative" style="background-image: url('assets/images/consulting.webp');">
-            <div class="position-relative z-2 text-white p-5 d-flex flex-column h-100 justify-content-between">
-                <a href="index.html" class="text-decoration-none mb-5"><img src="assets/images/logo.webp" alt="Stackly Logo" style="height: 35px;"></a>
+            <a href="index.html" class="position-absolute top-0 start-50 translate-middle-x mt-5 z-3 text-decoration-none">
+                <img src="assets/images/logo.webp" alt="Stackly Logo" style="height: 50px;">
+            </a>
+            <div class="position-relative z-2 text-white p-5 d-flex flex-column h-100 justify-content-end">
                 <div>
                     <h2 class="display-5 fw-bold mb-4">Your Next Business Opportunity Awaits.</h2>
                     <p class="lead text-light">Access your dashboard to track progress, download reports, and connect with your dedicated consulting team.</p>
@@ -27,13 +29,21 @@
         <div class="split-right bg-white px-4 py-5 px-sm-5 d-flex flex-column align-items-center justify-content-center">
             <div class="w-100" style="max-width: 450px;">
                 <div class="d-lg-none mb-4 text-center">
-                    <a href="index.html" class="text-decoration-none"><img src="assets/images/logo.webp" alt="Stackly Logo" style="height: 35px;"></a>
+                    <a href="index.html" class="text-decoration-none"><img src="assets/images/logo.webp" alt="Stackly Logo" style="height: 50px;"></a>
                 </div>
                 
                 <h2 class="fw-bold mb-1">Welcome Back</h2>
                 <p class="text-secondary mb-4">Please enter your details to sign in.</p>
                 
-                <form class="needs-validation" novalidate>
+                <div class="d-flex bg-light p-1 rounded-pill mb-4 role-toggle" style="border: 1px solid #e5e7eb;">
+                    <input type="radio" class="btn-check" name="role" id="roleClient" autocomplete="off" checked>
+                    <label class="btn w-50 rounded-pill fw-bold" for="roleClient">Client</label>
+
+                    <input type="radio" class="btn-check" name="role" id="roleAdmin" autocomplete="off">
+                    <label class="btn w-50 rounded-pill fw-bold" for="roleAdmin">Admin</label>
+                </div>
+                
+                <form class="needs-validation" novalidate id="loginForm" onsubmit="event.preventDefault(); const role = document.querySelector('input[name=\'role\']:checked').id; if(role === 'roleAdmin') { window.location.href='admin-dashboard.html'; } else { window.location.href='client-dashboard.html'; }">
                     <div class="mb-3">
                         <label class="form-label small fw-bold text-secondary">Email Address</label>
                         <input type="email" class="form-control form-control-stackly" required>

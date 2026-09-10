@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Stackly</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .sidebar-link {
+            text-align: left;
+            background: transparent;
+            border: none;
+            width: calc(100% - 30px);
+        }
+        .sidebar-link.active {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: var(--secondary-color) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar p-3 flex-column offcanvas-lg offcanvas-start" tabindex="-1" id="sidebarMenu">
+            <div class="d-flex justify-content-between align-items-start mb-5 mt-2 px-3">
+                <div>
+                    <a href="index.html" class="text-decoration-none"><img src="assets/images/logo.webp" alt="Stackly Logo" style="height: 35px;"></a>
+                    <div class="mt-2 text-uppercase fw-bold" style="color: #ff6b9d; font-size: 12px; letter-spacing: 1.5px;">Admin Portal</div>
+                </div>
+                <button type="button" class="btn-close btn-close-white d-lg-none" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+            </div>
+            
+            <div class="d-flex flex-column gap-2 h-100 nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="flex-grow: 1;">
+                <button class="sidebar-link active" id="v-pills-admin-overview-tab" data-bs-toggle="pill" data-bs-target="#v-pills-admin-overview" type="button" role="tab" aria-selected="true">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </button>
+                <button class="sidebar-link" id="v-pills-clients-tab" data-bs-toggle="pill" data-bs-target="#v-pills-clients" type="button" role="tab" aria-selected="false">
+                    <i class="bi bi-people"></i> Clients
+                </button>
+                <button class="sidebar-link" id="v-pills-admin-projects-tab" data-bs-toggle="pill" data-bs-target="#v-pills-admin-projects" type="button" role="tab" aria-selected="false">
+                    <i class="bi bi-kanban"></i> Projects
+                </button>
+                <button class="sidebar-link" id="v-pills-revenue-tab" data-bs-toggle="pill" data-bs-target="#v-pills-revenue" type="button" role="tab" aria-selected="false">
+                    <i class="bi bi-graph-up"></i> Revenue
+                </button>
+                <button class="sidebar-link" id="v-pills-consultants-tab" data-bs-toggle="pill" data-bs-target="#v-pills-consultants" type="button" role="tab" aria-selected="false">
+                    <i class="bi bi-person-badge"></i> Consultants
+                </button>
+                
+                <button class="sidebar-link mt-auto" id="v-pills-security-tab" data-bs-toggle="pill" data-bs-target="#v-pills-security" type="button" role="tab" aria-selected="false">
+                    <i class="bi bi-shield-lock"></i> Security
+                </button>
+                <a href="index.html" class="sidebar-link text-decoration-none text-danger mb-3"><i class="bi bi-box-arrow-right"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Navbar -->
+            <header class="dashboard-navbar border-bottom">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-light d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"><i class="bi bi-list fs-4"></i></button>
+                    <h4 class="mb-0 fw-bold d-none d-sm-block" id="navbar-title" style="color: var(--primary-color);">Admin Overview</h4>
+                </div>
+                <div class="d-flex align-items-center gap-4">
+                    <div class="position-relative">
+                        <i class="bi bi-envelope fs-5 text-secondary"></i>
+                    </div>
+                    <div class="position-relative">
+                        <i class="bi bi-bell fs-5 text-secondary"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 cursor-pointer">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: var(--text-dark) !important;">
+                            <span class="fw-bold">AM</span>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <p class="mb-0 fw-bold small" style="color: var(--primary-color);">Admin Manager</p>
+                            <p class="mb-0 small text-secondary" style="font-size: 11px;">System Access</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <div class="tab-content" id="v-pills-tabContent">
+                
+                <!-- Dashboard Overview Tab -->
+                <div class="tab-pane fade show active" id="v-pills-admin-overview" role="tabpanel" tabindex="0">
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6 col-xl-3">
+                            <div class="dashboard-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-secondary small fw-bold mb-1">Total Revenue</p>
+                                        <h3 class="mb-2" style="color: var(--primary-color);">$124.5k</h3>
+                                        <p class="mb-0 small text-success fw-bold"><i class="bi bi-arrow-up-short"></i> 12.5% <span class="text-secondary fw-normal">vs last month</span></p>
+                                    </div>
+                                    <div class="stat-icon bg-success bg-opacity-10 text-success">
+                                        <i class="bi bi-currency-dollar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3">
+                            <div class="dashboard-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-secondary small fw-bold mb-1">Active Clients</p>
+                                        <h3 class="mb-2" style="color: var(--primary-color);">42</h3>
+                                        <p class="mb-0 small text-success fw-bold"><i class="bi bi-arrow-up-short"></i> 4 <span class="text-secondary fw-normal">new this week</span></p>
+                                    </div>
+                                    <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                                        <i class="bi bi-people"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3">
+                            <div class="dashboard-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-secondary small fw-bold mb-1">Ongoing Projects</p>
+                                        <h3 class="mb-2" style="color: var(--primary-color);">18</h3>
+                                        <p class="mb-0 small text-warning fw-bold">3 <span class="text-secondary fw-normal">require attention</span></p>
+                                    </div>
+                                    <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+                                        <i class="bi bi-kanban"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3">
+                            <div class="dashboard-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-secondary small fw-bold mb-1">Consultants Online</p>
+                                        <h3 class="mb-2" style="color: var(--primary-color);">12</h3>
+                                        <p class="mb-0 small text-secondary">Out of 15 total</p>
+                                    </div>
+                                    <div class="stat-icon bg-info bg-opacity-10 text-info">
+                                        <i class="bi bi-laptop"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-lg-7 col-xl-8">
+                            <div class="dashboard-card">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h5 class="mb-0">Recent Client Signups</h5>
+                                    <button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="document.getElementById('v-pills-clients-tab').click()">View All</button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0 border-top">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 50px;"><img src="https://ui-avatars.com/api/?name=Tech+Nova&background=random" class="rounded-circle" width="40" height="40" alt="Avatar"></td>
+                                                <td>
+                                                    <p class="fw-bold mb-0" style="color: var(--primary-color);">Tech Nova Solutions</p>
+                                                    <small class="text-secondary">Enterprise Plan</small>
+                                                </td>
+                                                <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill px-3 py-2">Active</span></td>
+                                                <td class="text-secondary small">Joined 2 days ago</td>
+                                                <td class="text-end"><button class="btn btn-sm btn-light rounded-circle"><i class="bi bi-three-dots-vertical"></i></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="https://ui-avatars.com/api/?name=Global+Retail&background=random" class="rounded-circle" width="40" height="40" alt="Avatar"></td>
+                                                <td>
+                                                    <p class="fw-bold mb-0" style="color: var(--primary-color);">Global Retail Inc.</p>
+                                                    <small class="text-secondary">Pro Plan</small>
+                                                </td>
+                                                <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill px-3 py-2">Active</span></td>
+                                                <td class="text-secondary small">Joined 5 days ago</td>
+                                                <td class="text-end"><button class="btn btn-sm btn-light rounded-circle"><i class="bi bi-three-dots-vertical"></i></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><img src="https://ui-avatars.com/api/?name=Alpha+Logistics&background=random" class="rounded-circle" width="40" height="40" alt="Avatar"></td>
+                                                <td>
+                                                    <p class="fw-bold mb-0" style="color: var(--primary-color);">Alpha Logistics</p>
+                                                    <small class="text-secondary">Basic Plan</small>
+                                                </td>
+                                                <td><span class="badge bg-warning bg-opacity-25 text-warning rounded-pill px-3 py-2">Pending Setup</span></td>
+                                                <td class="text-secondary small">Joined 1 week ago</td>
+                                                <td class="text-end"><button class="btn btn-sm btn-light rounded-circle"><i class="bi bi-three-dots-vertical"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-xl-4">
+                            <div class="dashboard-card bg-dark-green text-white">
+                                <h5 class="mb-4 text-white">System Status</h5>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="small opacity-75">Server Load</span>
+                                        <span class="small fw-bold">34%</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px; background-color: rgba(255,255,255,0.2);">
+                                        <div class="progress-bar bg-secondary" role="progressbar" style="width: 34%; background-color: var(--secondary-color) !important;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="small opacity-75">Storage Capacity</span>
+                                        <span class="small fw-bold">78%</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px; background-color: rgba(255,255,255,0.2);">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 78%;" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="small opacity-75">Database Health</span>
+                                        <span class="small fw-bold">99.9%</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px; background-color: rgba(255,255,255,0.2);">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%; background-color: var(--secondary-color) !important;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-5 p-3 rounded-3" style="background-color: rgba(0,0,0,0.2);">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="bg-success rounded-circle" style="width: 12px; height: 12px;"></div>
+                                        <p class="mb-0 small fw-bold">All Systems Operational</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clients Tab -->
+                <div class="tab-pane fade" id="v-pills-clients" role="tabpanel" tabindex="0">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="mb-0" style="color: var(--primary-color);">Client Management</h3>
+                        <button class="btn btn-primary-stackly btn-sm"><i class="bi bi-plus-lg"></i> Add New Client</button>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-secondary"></i></span>
+                                    <input type="text" class="form-control form-control-stackly border-start-0 ps-0" placeholder="Search clients...">
+                                </div>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-md-end gap-2 mt-3 mt-md-0">
+                                <select class="form-select form-control-stackly w-auto">
+                                    <option selected>All Plans</option>
+                                    <option>Enterprise</option>
+                                    <option>Pro</option>
+                                    <option>Basic</option>
+                                </select>
+                                <select class="form-select form-control-stackly w-auto">
+                                    <option selected>Active</option>
+                                    <option>Pending</option>
+                                    <option>Suspended</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Company</th>
+                                        <th>Primary Contact</th>
+                                        <th>Plan</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <img src="https://ui-avatars.com/api/?name=Tech+Nova&background=random" class="rounded-circle" width="40" height="40">
+                                                <span class="fw-bold" style="color: var(--primary-color);">Tech Nova Solutions</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="mb-0 small fw-bold">John Doe</p>
+                                            <p class="mb-0 small text-secondary">john@technova.com</p>
+                                        </td>
+                                        <td>Enterprise</td>
+                                        <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill px-3 py-1">Active</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary rounded-pill me-1"><i class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <img src="https://ui-avatars.com/api/?name=Global+Retail&background=random" class="rounded-circle" width="40" height="40">
+                                                <span class="fw-bold" style="color: var(--primary-color);">Global Retail Inc.</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="mb-0 small fw-bold">Jane Smith</p>
+                                            <p class="mb-0 small text-secondary">jane@globalretail.com</p>
+                                        </td>
+                                        <td>Pro</td>
+                                        <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill px-3 py-1">Active</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary rounded-pill me-1"><i class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <img src="https://ui-avatars.com/api/?name=Alpha+Logistics&background=random" class="rounded-circle" width="40" height="40">
+                                                <span class="fw-bold" style="color: var(--primary-color);">Alpha Logistics</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="mb-0 small fw-bold">Mike Johnson</p>
+                                            <p class="mb-0 small text-secondary">mike@alphalogistics.com</p>
+                                        </td>
+                                        <td>Basic</td>
+                                        <td><span class="badge bg-warning bg-opacity-25 text-warning rounded-pill px-3 py-1">Pending setup</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary rounded-pill me-1"><i class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <img src="https://ui-avatars.com/api/?name=Beta+Tech&background=random" class="rounded-circle" width="40" height="40">
+                                                <span class="fw-bold" style="color: var(--primary-color);">Beta Tech Ltd.</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="mb-0 small fw-bold">Alice Brown</p>
+                                            <p class="mb-0 small text-secondary">alice@betatech.com</p>
+                                        </td>
+                                        <td>Enterprise</td>
+                                        <td><span class="badge bg-danger bg-opacity-25 text-danger rounded-pill px-3 py-1">Suspended</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary rounded-pill me-1"><i class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <p class="small text-secondary mb-0">Showing 1 to 4 of 42 entries</p>
+                            <nav>
+                                <ul class="pagination pagination-sm mb-0">
+                                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Tab -->
+                <div class="tab-pane fade" id="v-pills-admin-projects" role="tabpanel" tabindex="0">
+                    <h3 class="mb-4" style="color: var(--primary-color);">All Active Projects</h3>
+                    
+                    <div class="row g-4">
+                        <div class="col-lg-4">
+                            <div class="dashboard-card bg-light">
+                                <h6 class="mb-3 text-secondary d-flex justify-content-between">
+                                    Planning / Setup <span class="badge bg-secondary rounded-pill">4</span>
+                                </h6>
+                                <div class="card border-0 shadow-sm mb-3">
+                                    <div class="card-body p-3">
+                                        <h6 class="fw-bold text-primary">Warehouse Audit</h6>
+                                        <p class="small text-secondary mb-2">Alpha Logistics</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <img src="https://ui-avatars.com/api/?name=David+Chen&background=random" class="rounded-circle" width="24" height="24">
+                                            <span class="badge bg-info bg-opacity-10 text-info">In 3 days</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-0 shadow-sm mb-3">
+                                    <div class="card-body p-3">
+                                        <h6 class="fw-bold text-primary">Initial Strategy Meeting</h6>
+                                        <p class="small text-secondary mb-2">Global Retail Inc.</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex -space-x-1">
+                                                <img src="https://ui-avatars.com/api/?name=Sarah+Miller&background=random" class="rounded-circle" width="24" height="24">
+                                            </div>
+                                            <span class="badge bg-info bg-opacity-10 text-info">Tomorrow</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-0 shadow-sm mb-3">
+                                    <div class="card-body p-3">
+                                        <h6 class="fw-bold text-primary">Q4 Kickoff Planning</h6>
+                                        <p class="small text-secondary mb-2">Beta Tech Ltd.</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Emily+Davis&background=random" class="rounded-circle" width="24" height="24">
+                                            <span class="badge bg-secondary bg-opacity-10 text-secondary">Next Week</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-0 shadow-sm mb-3">
+                                    <div class="card-body p-3">
+                                        <h6 class="fw-bold text-primary">Employee Feedback Survey</h6>
+                                        <p class="small text-secondary mb-2">Internal Project</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Admin+Manager&background=random" class="rounded-circle" width="24" height="24">
+                                            <span class="badge bg-secondary bg-opacity-10 text-secondary">No Deadline</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="dashboard-card bg-light">
+                                <h6 class="mb-3 text-primary d-flex justify-content-between">
+                                    In Progress <span class="badge bg-primary rounded-pill">3</span>
+                                </h6>
+                                <div class="card border-0 shadow-sm mb-3">
+                                    <div class="card-body p-3">
+                                        <h6 class="fw-bold text-primary">Market Expansion Strategy</h6>
+                                        <p class="small text-secondary mb-2">Tech Nova Solutions</p>
+                                        <div class="progress mb-2" style="height: 5px;">
+                                            <div class="progress-bar bg-success" style="width: 45%;"></div>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex -space-x-1">
+                                                <img src="https://ui-avatars.com/api/?name=Sarah+Miller&background=random" class="rounded-circle border border-white" width="24" height="24" style="margin-right:-8px; z-index:2">
+                                                <img src="https://ui-avatars.com/api/?name=Emily+Davis&background=random" class="rounded-circle border border-white" width="24" height="24" style="z-index:1">
+                                            </div>
+                                            <span class="badge bg-success bg-opacity-10 text-success">On Track</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-0 shadow-sm mb-3">
+                                    <div class="card-body p-3">
+                                        <h6 class="fw-bold text-primary">Digital Transformation</h6>
+                                        <p class="small text-secondary mb-2">Global Retail Inc.</p>
+                                        <div class="progress mb-2" style="height: 5px;">
+                                            <div class="progress-bar bg-primary" style="width: 70%;"></div>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Sarah+Miller&background=random" class="rounded-circle" width="24" height="24">
+                                            <span class="badge bg-success bg-opacity-10 text-success">On Track</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-0 shadow-sm mb-3">
+                                    <div class="card-body p-3">
+                                        <h6 class="fw-bold text-primary">Server Migration</h6>
+                                        <p class="small text-secondary mb-2">Tech Nova Solutions</p>
+                                        <div class="progress mb-2" style="height: 5px;">
+                                            <div class="progress-bar bg-warning" style="width: 25%;"></div>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex -space-x-1">
+                                                <img src="https://ui-avatars.com/api/?name=David+Chen&background=random" class="rounded-circle border border-white" width="24" height="24" style="margin-right:-8px; z-index:2">
+                                                <img src="https://ui-avatars.com/api/?name=Admin+Manager&background=random" class="rounded-circle border border-white" width="24" height="24" style="z-index:1">
+                                            </div>
+                                            <span class="badge bg-warning bg-opacity-10 text-warning">At Risk</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="dashboard-card bg-light">
+                                <h6 class="mb-3 text-warning d-flex justify-content-between">
+                                    Review Required <span class="badge bg-warning text-dark rounded-pill">2</span>
+                                </h6>
+                                <div class="card border-0 shadow-sm mb-3 border-start border-warning border-4">
+                                    <div class="card-body p-3">
+                                        <h6 class="fw-bold text-primary">Supply Chain Optimization</h6>
+                                        <p class="small text-secondary mb-2">Tech Nova Solutions</p>
+                                        <p class="small text-danger mb-2"><i class="bi bi-exclamation-triangle"></i> Pending client approval on Phase 1</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <img src="https://ui-avatars.com/api/?name=David+Chen&background=random" class="rounded-circle" width="24" height="24">
+                                            <span class="badge bg-warning bg-opacity-10 text-warning">Blocked</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-0 shadow-sm mb-3 border-start border-primary border-4">
+                                    <div class="card-body p-3">
+                                        <h6 class="fw-bold text-primary">Quarterly Report Draft</h6>
+                                        <p class="small text-secondary mb-2">Internal</p>
+                                        <p class="small text-primary mb-2"><i class="bi bi-info-circle"></i> Needs manager sign-off</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Emily+Davis&background=random" class="rounded-circle" width="24" height="24">
+                                            <span class="badge bg-primary bg-opacity-10 text-primary">In Review</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue Tab -->
+                <div class="tab-pane fade" id="v-pills-revenue" role="tabpanel" tabindex="0">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="mb-0" style="color: var(--primary-color);">Revenue & Financials</h3>
+                        <button class="btn btn-outline-secondary btn-sm rounded-pill"><i class="bi bi-download"></i> Export Report</button>
+                    </div>
+                    
+                    <div class="dashboard-card mb-4">
+                        <h5 class="mb-4">Monthly Recurring Revenue (MRR)</h5>
+                        <!-- CSS Grid based chart representation -->
+                        <div class="d-flex align-items-end justify-content-between pt-4 pb-2 px-3 border-bottom border-start" style="height: 250px;">
+                            <div class="d-flex flex-column align-items-center gap-2">
+                                <div class="bg-primary rounded-top w-100" style="height: 80px; width: 40px !important;"></div>
+                                <small class="text-secondary">Apr</small>
+                            </div>
+                            <div class="d-flex flex-column align-items-center gap-2">
+                                <div class="bg-primary rounded-top w-100" style="height: 100px; width: 40px !important;"></div>
+                                <small class="text-secondary">May</small>
+                            </div>
+                            <div class="d-flex flex-column align-items-center gap-2">
+                                <div class="bg-primary rounded-top w-100" style="height: 110px; width: 40px !important;"></div>
+                                <small class="text-secondary">Jun</small>
+                            </div>
+                            <div class="d-flex flex-column align-items-center gap-2">
+                                <div class="bg-primary rounded-top w-100" style="height: 140px; width: 40px !important;"></div>
+                                <small class="text-secondary">Jul</small>
+                            </div>
+                            <div class="d-flex flex-column align-items-center gap-2">
+                                <div class="bg-primary rounded-top w-100" style="height: 170px; width: 40px !important;"></div>
+                                <small class="text-secondary">Aug</small>
+                            </div>
+                            <div class="d-flex flex-column align-items-center gap-2">
+                                <div class="bg-primary rounded-top w-100" style="height: 200px; width: 40px !important; background-color: var(--secondary-color) !important;"></div>
+                                <small class="fw-bold" style="color: var(--primary-color);">Sep</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h5 class="mb-4">Recent Transactions</h5>
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Transaction ID</th>
+                                    <th>Client</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="text-secondary">#TRX-8921</span></td>
+                                    <td class="fw-bold">Tech Nova Solutions</td>
+                                    <td>Sep 15, 2026</td>
+                                    <td>$4,500.00</td>
+                                    <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill px-3">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="text-secondary">#TRX-8920</span></td>
+                                    <td class="fw-bold">Global Retail Inc.</td>
+                                    <td>Sep 14, 2026</td>
+                                    <td>$2,500.00</td>
+                                    <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill px-3">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="text-secondary">#TRX-8919</span></td>
+                                    <td class="fw-bold">Alpha Logistics</td>
+                                    <td>Sep 10, 2026</td>
+                                    <td>$1,000.00</td>
+                                    <td><span class="badge bg-warning bg-opacity-25 text-warning rounded-pill px-3">Processing</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Consultants Tab -->
+                <div class="tab-pane fade" id="v-pills-consultants" role="tabpanel" tabindex="0">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="mb-0" style="color: var(--primary-color);">Consultants Directory</h3>
+                        <button class="btn btn-primary-stackly btn-sm"><i class="bi bi-person-plus"></i> Add Consultant</button>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="dashboard-card text-center position-relative pt-5">
+                                <span class="position-absolute top-0 end-0 m-3 badge bg-success rounded-pill">Available</span>
+                                <img src="https://ui-avatars.com/api/?name=Sarah+Miller&background=random" class="rounded-circle mb-3" width="80" height="80">
+                                <h5 class="mb-1" style="color: var(--primary-color);">Sarah Miller</h5>
+                                <p class="text-secondary small mb-3">Lead Strategist</p>
+                                <div class="d-flex justify-content-center gap-3 mb-4">
+                                    <div class="text-center">
+                                        <h5 class="mb-0">4</h5>
+                                        <small class="text-secondary" style="font-size:10px;">Active Proj</small>
+                                    </div>
+                                    <div class="border-start border-end px-3 text-center">
+                                        <h5 class="mb-0 text-success">98%</h5>
+                                        <small class="text-secondary" style="font-size:10px;">Client Rating</small>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5 class="mb-0">5y</h5>
+                                        <small class="text-secondary" style="font-size:10px;">Tenure</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-secondary btn-sm rounded-pill w-100">View Profile</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="dashboard-card text-center position-relative pt-5">
+                                <span class="position-absolute top-0 end-0 m-3 badge bg-danger rounded-pill">Busy</span>
+                                <img src="https://ui-avatars.com/api/?name=David+Chen&background=random" class="rounded-circle mb-3" width="80" height="80">
+                                <h5 class="mb-1" style="color: var(--primary-color);">David Chen</h5>
+                                <p class="text-secondary small mb-3">Data Analyst</p>
+                                <div class="d-flex justify-content-center gap-3 mb-4">
+                                    <div class="text-center">
+                                        <h5 class="mb-0">6</h5>
+                                        <small class="text-secondary" style="font-size:10px;">Active Proj</small>
+                                    </div>
+                                    <div class="border-start border-end px-3 text-center">
+                                        <h5 class="mb-0 text-success">95%</h5>
+                                        <small class="text-secondary" style="font-size:10px;">Client Rating</small>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5 class="mb-0">2y</h5>
+                                        <small class="text-secondary" style="font-size:10px;">Tenure</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-secondary btn-sm rounded-pill w-100">View Profile</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="dashboard-card text-center position-relative pt-5">
+                                <span class="position-absolute top-0 end-0 m-3 badge bg-warning text-dark rounded-pill">On Leave</span>
+                                <img src="https://ui-avatars.com/api/?name=Emily+Davis&background=random" class="rounded-circle mb-3" width="80" height="80">
+                                <h5 class="mb-1" style="color: var(--primary-color);">Emily Davis</h5>
+                                <p class="text-secondary small mb-3">Operations Specialist</p>
+                                <div class="d-flex justify-content-center gap-3 mb-4">
+                                    <div class="text-center">
+                                        <h5 class="mb-0">0</h5>
+                                        <small class="text-secondary" style="font-size:10px;">Active Proj</small>
+                                    </div>
+                                    <div class="border-start border-end px-3 text-center">
+                                        <h5 class="mb-0 text-success">99%</h5>
+                                        <small class="text-secondary" style="font-size:10px;">Client Rating</small>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5 class="mb-0">8y</h5>
+                                        <small class="text-secondary" style="font-size:10px;">Tenure</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-secondary btn-sm rounded-pill w-100">View Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Tab -->
+                <div class="tab-pane fade" id="v-pills-security" role="tabpanel" tabindex="0">
+                    <h3 class="mb-4" style="color: var(--primary-color);">System Security & Audits</h3>
+                    
+                    <div class="row g-4">
+                        <div class="col-lg-4">
+                            <div class="dashboard-card bg-dark-green text-white mb-4">
+                                <h5 class="text-white mb-4"><i class="bi bi-shield-check text-success me-2"></i> Overall Health</h5>
+                                <h1 class="text-white display-4 fw-bold mb-0">98<span class="fs-4">/100</span></h1>
+                                <p class="text-white opacity-75 mt-2 mb-0">Your system is highly secure.</p>
+                            </div>
+                            <div class="dashboard-card">
+                                <h6>Quick Actions</h6>
+                                <button class="btn btn-outline-danger w-100 rounded-pill mb-2 mt-3 text-start"><i class="bi bi-person-x me-2"></i> Force Logout All Users</button>
+                                <button class="btn btn-outline-secondary w-100 rounded-pill mb-2 text-start"><i class="bi bi-key me-2"></i> Reset API Keys</button>
+                                <button class="btn btn-outline-secondary w-100 rounded-pill text-start"><i class="bi bi-database-down me-2"></i> Manual Backup</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-8">
+                            <div class="dashboard-card">
+                                <h5 class="mb-4">Recent Audit Logs</h5>
+                                <div class="table-responsive">
+                                    <table class="table align-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Timestamp</th>
+                                                <th>Event</th>
+                                                <th>User / IP</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="small text-secondary">Sep 10, 10:14 AM</td>
+                                                <td class="fw-bold">Admin Login</td>
+                                                <td><span class="small">AM (192.168.1.45)</span></td>
+                                                <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill px-2">Success</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="small text-secondary">Sep 10, 09:42 AM</td>
+                                                <td class="fw-bold">Client Record Deleted</td>
+                                                <td><span class="small">Sarah Miller</span></td>
+                                                <td><span class="badge bg-warning bg-opacity-25 text-warning rounded-pill px-2">Warning</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="small text-secondary">Sep 10, 08:15 AM</td>
+                                                <td class="fw-bold">System Backup Created</td>
+                                                <td><span class="small">System</span></td>
+                                                <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill px-2">Success</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="small text-secondary">Sep 10, 02:00 AM</td>
+                                                <td class="fw-bold">Automated Database Sync</td>
+                                                <td><span class="small">Cron Job</span></td>
+                                                <td><span class="badge bg-success bg-opacity-25 text-success rounded-pill px-2">Success</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="small text-secondary">Sep 09, 11:45 PM</td>
+                                                <td class="fw-bold">API Key Generated</td>
+                                                <td><span class="small">Tech Nova Solutions</span></td>
+                                                <td><span class="badge bg-primary bg-opacity-25 text-primary rounded-pill px-2">Info</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="small text-secondary">Sep 09, 11:32 PM</td>
+                                                <td class="fw-bold">IP Blocked</td>
+                                                <td><span class="small">System (104.28.14.99)</span></td>
+                                                <td><span class="badge bg-primary bg-opacity-25 text-primary rounded-pill px-2">Action Taken</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="small text-secondary">Sep 09, 11:31 PM</td>
+                                                <td class="fw-bold">Failed Login Attempt</td>
+                                                <td><span class="small">Unknown (104.28.14.99)</span></td>
+                                                <td><span class="badge bg-danger bg-opacity-25 text-danger rounded-pill px-2">Failed</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="small text-secondary">Sep 09, 11:30 PM</td>
+                                                <td class="fw-bold">Failed Login Attempt</td>
+                                                <td><span class="small">Unknown (104.28.14.99)</span></td>
+                                                <td><span class="badge bg-danger bg-opacity-25 text-danger rounded-pill px-2">Failed</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="small text-secondary">Sep 09, 11:29 PM</td>
+                                                <td class="fw-bold">Failed Login Attempt</td>
+                                                <td><span class="small">Unknown (104.28.14.99)</span></td>
+                                                <td><span class="badge bg-danger bg-opacity-25 text-danger rounded-pill px-2">Failed</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="small text-secondary">Sep 09, 04:20 PM</td>
+                                                <td class="fw-bold">Permission Changed</td>
+                                                <td><span class="small">AM -> David Chen</span></td>
+                                                <td><span class="badge bg-warning bg-opacity-25 text-warning rounded-pill px-2">Warning</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+
+                <!-- Footer for all tabs -->
+                <footer class="mt-5 text-center">
+                    <p class="small text-secondary">&copy; 2026 Stackly Consulting. Admin Portal.</p>
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Update navbar title based on active tab
+        document.querySelectorAll('button[data-bs-toggle="pill"]').forEach(tab => {
+            tab.addEventListener('shown.bs.tab', event => {
+                const text = event.target.innerText.trim();
+                document.getElementById('navbar-title').innerText = text === 'Dashboard' ? 'Admin Overview' : text;
+            });
+        });
+    </script>
+</body>
+</html>
