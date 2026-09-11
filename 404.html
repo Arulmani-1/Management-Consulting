@@ -107,5 +107,16 @@
             }
         });
     </script>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                if (preloader) {
+                    preloader.classList.add('hidden');
+                    setTimeout(() => { preloader.remove(); }, 500);
+                }
+            }, 2000);
+        });
+    </script>
 </body>
 </html>

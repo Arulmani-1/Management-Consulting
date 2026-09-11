@@ -1058,3 +1058,35 @@ body {
     0% { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
+
+/* Universal Button Hover Color Change */
+.btn:hover, 
+.btn-primary-stackly:hover, 
+.btn-outline-stackly:hover,
+button:hover {
+    background-color: var(--primary-color) !important;
+    color: var(--white) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Leadership Card Social Icons Hover Effect */
+.leadership-card .card-body a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.leadership-card:hover .card-body a {
+    animation: card-btn-pulse-border 2s infinite;
+    background-color: var(--secondary-color);
+    color: var(--primary-color) !important;
+}
+
+.leadership-card .card-body a:hover {
+    transform: scale(1.1);
+    animation: none;
+}
