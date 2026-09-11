@@ -1008,3 +1008,53 @@ body {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* Card 3D Pop Effect */
+.card {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease !important;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.015) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+    z-index: 5;
+}
+
+/* Card Button Pulse Border Effect */
+@keyframes card-btn-pulse-border {
+    0% {
+        box-shadow: 0 0 0 0 rgba(187, 247, 208, 0.8);
+    }
+    70% {
+        box-shadow: 0 0 0 12px rgba(187, 247, 208, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(187, 247, 208, 0);
+    }
+}
+
+.card .btn,
+.card button {
+    animation: card-btn-pulse-border 2s infinite;
+}
+
+.card .btn:hover,
+.card button:hover {
+    animation: none;
+}
+
+/* Gradient Flow Effect for Headings */
+.gradient-flow-text {
+    background: linear-gradient(270deg, #bbf7d0, #ff6b9d, #bbf7d0);
+    background-size: 200% auto;
+    color: transparent !important;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradientFlow 3s linear infinite;
+    display: inline-block;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
