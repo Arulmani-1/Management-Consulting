@@ -290,7 +290,40 @@ img {
 }
 
 .accordion-button::after {
-  filter: grayscale(1);
+  background-image: none !important;
+  font-family: "bootstrap-icons";
+  content: "\F282";
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: currentColor;
+}
+.accordion-button:not(.collapsed)::after {
+  background-image: none !important;
+  transform: rotate(-180deg);
+}
+.btn-close {
+  background-image: none !important;
+  font-family: "bootstrap-icons";
+  content: "\F659";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: currentColor;
+  opacity: 0.5;
+}
+.btn-close:hover {
+  opacity: 1;
+}
+.btn-close-white {
+  color: #fff !important;
+}
+.navbar-toggler-icon {
+  background-image: none !important;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-image: none !important;
 }
 
 /* Case Studies */
