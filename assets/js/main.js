@@ -1,7 +1,6 @@
 // main.js
 
-// Preloader logic: remove after 2 seconds
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         const preloader = document.getElementById('preloader');
         if (preloader) {
@@ -10,7 +9,7 @@ window.addEventListener('load', () => {
                 preloader.remove();
             }, 500);
         }
-    }, 2000);
+    }, 500); // reduced timeout so it shows faster
 });
 
 document.addEventListener('DOMContentLoaded', () => {
