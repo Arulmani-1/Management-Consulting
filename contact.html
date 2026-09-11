@@ -65,8 +65,8 @@
                     </div>
                     
                     <div class="d-flex gap-3">
-                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="404.html" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="404.html" class="social-icon"><i class="bi bi-twitter-x"></i></a>
                     </div>
                 </div>
                 
@@ -122,8 +122,13 @@
     </section>
 
     <!-- Map iframe -->
-    <section class="container mb-5 overflow-hidden rounded-4 shadow-sm px-0">
+    <section class="container mb-5 overflow-hidden rounded-4 shadow-sm px-0 position-relative">
         <iframe src="https://maps.google.com/maps?q=MMR%20Complex,%20Periyakollappatty,%20Salem&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        
+        <!-- Mobile Map Overlay (Navigates to new tab) -->
+        <a href="https://maps.google.com/maps?q=MMR%20Complex,%20Periyakollappatty,%20Salem" target="_blank" class="d-block d-md-none position-absolute top-0 start-0 w-100 h-100" style="z-index: 10;">
+            <span class="visually-hidden">Open Map in New Tab</span>
+        </a>
     </section>
     <!-- CTA Section -->
     <section class="container mb-5">
