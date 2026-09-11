@@ -515,7 +515,15 @@
                     
                     <div class="row g-4">
                         <div class="col-lg-3">
-                            <div class="nav flex-column nav-pills dashboard-card p-3 gap-2" role="tablist">
+                            <style>
+                                .settings-nav .nav-link:not(.active) {
+                                    color: #333 !important;
+                                }
+                                .settings-nav .nav-link:not(.active):hover {
+                                    color: #ffffff !important;
+                                }
+                            </style>
+                            <div class="nav flex-column nav-pills dashboard-card p-3 gap-2 settings-nav" role="tablist">
                                 <button class="nav-link active text-start" data-bs-toggle="pill" type="button">Profile</button>
                                 <button class="nav-link text-start" data-bs-toggle="pill" type="button">Security</button>
                                 <button class="nav-link text-start" data-bs-toggle="pill" type="button">Notifications</button>
